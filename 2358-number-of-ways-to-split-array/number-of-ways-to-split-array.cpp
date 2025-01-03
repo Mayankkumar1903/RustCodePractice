@@ -1,25 +1,14 @@
 class Solution {
 public:
     int waysToSplitArray(vector<int>& nums) {
-        int n = nums.size();
-        int res = 0;
-        long totalSum = 0, leftSum = 0;
-
-        // Calculate the total sum of the array
-        for (int num : nums) {
-            totalSum += num;
+        long long  totSum = 0;
+        for(int i:nums) totSum += i;
+        long long  currSum = 0;
+        int cnt = 0;
+        for(int i=0;i<nums.size()-1;i++){
+            currSum += nums[i];
+            if(currSum >= (totSum-currSum)) cnt++;
         }
-
-        // Iterate through the array and check valid splits
-        for (int i = 0; i < n - 1; i++) {
-            leftSum += nums[i];
-            long rightSum = totalSum - leftSum;
-
-            if (leftSum >= rightSum) {
-                res++;
-            }
-        }
-
-        return res;
+        return cnt;
     }
 };
